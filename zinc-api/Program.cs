@@ -6,12 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json", false).Build().GetSection("Database");
+
+var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json", false).Build().GetSection("DBconnection");
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseNpgsql
         (
             $"Host={cfg.GetValue<string>("HOST")};" +
-            $"Port={cfg.GetValue<int>("PORT")};" +
+            $"Port={cfg.GetValue<string>("PORT")};" +
             $"Database={cfg.GetValue<string>("DATABASE")};" +
             $"Username={cfg.GetValue<string>("USER")};" +
             $"Password={cfg.GetValue<string>("PASSWORD")}"

@@ -37,22 +37,22 @@ namespace zinc_api.Services
             modelBuilder.Entity<Department>().HasData(new { id = 6, name = "VYSH" });
             modelBuilder.Entity<Department>().HasData(new { id = 7, name = "KEC" });
 
-            modelBuilder.Entity<Station>().HasData(new {id=1, name= "IUS_OBG511", dep_id=1, name_table = "OBG1" });
-            modelBuilder.Entity<Station>().HasData(new { id = 2, name = "IUS_OBG52", dep_id = 1, name_table = "OBG2" });
-            modelBuilder.Entity<Station>().HasData(new { id = 3, name = "IUS_VELC1", dep_id = 2, name_table = "GMC_Velc1" });
-            modelBuilder.Entity<Station>().HasData(new { id = 4, name = "IUS_VELC2", dep_id = 2, name_table = "GMC_Velc2" });
-            modelBuilder.Entity<Station>().HasData(new { id = 5, name = "VELC5PC21", dep_id = 2, name_table = "Velc_KVP5" });
-            modelBuilder.Entity<Station>().HasData(new { id = 6, name = "KVP61", dep_id = 2, name_table = "Velc_KVP6" });
-            modelBuilder.Entity<Station>().HasData(new { id = 7, name = "IUS_VELC1", dep_id = 3, name_table = "GMC_Velc1" });
-            modelBuilder.Entity<Station>().HasData(new { id = 8, name = "IUS_VELC2", dep_id = 3, name_table = "GMC_Velc2" });
-            modelBuilder.Entity<Station>().HasData(new { id = 9, name = "LAROX", dep_id = 3, name_table = "GMC_Larox" });
-            modelBuilder.Entity<Station>().HasData(new { id = 10, name = "IUS_SKC42", dep_id = 4, name_table = "SKC1" });
-            modelBuilder.Entity<Station>().HasData(new { id = 11, name = "IUS_SKC43", dep_id = 4, name_table = "SKC2" });
-            modelBuilder.Entity<Station>().HasData(new { id = 12, name = "HVP_station", dep_id = 5, name_table = "HVP" });
-            modelBuilder.Entity<Station>().HasData(new { id = 13, name = "IUS_V5", dep_id = 6, name_table = "Vysh" });
-            modelBuilder.Entity<Station>().HasData(new { id = 14, name = "CHPEW2", dep_id = 7, name_table = "KEC1" });
-            modelBuilder.Entity<Station>().HasData(new { id = 15, name = "CHPEW3", dep_id = 7, name_table = "KEC2" });
-            modelBuilder.Entity<Station>().HasData(new { id = 16, name = "KADMIEVOE", dep_id = 7, name_table = "KEC_Kadmievoe" });
+            modelBuilder.Entity<Station>().HasData(new {id=1, name= "IUS_OBG511", departmentid=1, name_table = "OBG1" });
+            modelBuilder.Entity<Station>().HasData(new { id = 2, name = "IUS_OBG52", departmentid = 1, name_table = "OBG2" });
+            modelBuilder.Entity<Station>().HasData(new { id = 3, name = "IUS_VELC1", departmentid = 2, name_table = "GMC_Velc1" });
+            modelBuilder.Entity<Station>().HasData(new { id = 4, name = "IUS_VELC2", departmentid = 2, name_table = "GMC_Velc2" });
+            modelBuilder.Entity<Station>().HasData(new { id = 5, name = "VELC5PC21", departmentid = 2, name_table = "Velc_KVP5" });
+            modelBuilder.Entity<Station>().HasData(new { id = 6, name = "KVP61", departmentid = 2, name_table = "Velc_KVP6" });
+            modelBuilder.Entity<Station>().HasData(new { id = 7, name = "IUS_VELC1", departmentid = 3, name_table = "GMC_Velc1" });
+            modelBuilder.Entity<Station>().HasData(new { id = 8, name = "IUS_VELC2", departmentid = 3, name_table = "GMC_Velc2" });
+            modelBuilder.Entity<Station>().HasData(new { id = 9, name = "LAROX", departmentid = 3, name_table = "GMC_Larox" });
+            modelBuilder.Entity<Station>().HasData(new { id = 10, name = "IUS_SKC42", departmentid = 4, name_table = "SKC1" });
+            modelBuilder.Entity<Station>().HasData(new { id = 11, name = "IUS_SKC43", departmentid = 4, name_table = "SKC2" });
+            modelBuilder.Entity<Station>().HasData(new { id = 12, name = "HVP_station", departmentid = 5, name_table = "HVP" });
+            modelBuilder.Entity<Station>().HasData(new { id = 13, name = "IUS_V5", departmentid = 6, name_table = "Vysh" });
+            modelBuilder.Entity<Station>().HasData(new { id = 14, name = "CHPEW2", departmentid = 7, name_table = "KEC1" });
+            modelBuilder.Entity<Station>().HasData(new { id = 15, name = "CHPEW3", departmentid = 7, name_table = "KEC2" });
+            modelBuilder.Entity<Station>().HasData(new { id = 16, name = "KADMIEVOE", departmentid = 7, name_table = "KEC_Kadmievoe" });
         }
     }
 }

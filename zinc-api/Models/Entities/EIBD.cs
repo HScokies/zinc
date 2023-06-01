@@ -8,12 +8,11 @@ namespace zinc_api.Models.Entities
         [Key]
         public virtual int id { get; set; }
         public  int num { get; set; } //Индекс столбца дампа (0 = 3)
-        [Column(TypeName = "date")]
-        public  DateTime date { get; set; }
-        [Column(TypeName = "time")]
-        public  DateTime time { get; set; }
+        public  DateOnly date { get; set; }
+        public  TimeOnly time { get; set; }
         public  double val { get; set; } //Знч-е столбца дампа
     }
+
     public class KEC1 : EIBD { }//CHPEW2
     public class KEC2 : EIBD { }//CHPEW3
     public class KEC_Kadmievoe : EIBD { }//KADMIEVOE
