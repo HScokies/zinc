@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zinc-api", "zinc-api.csproj", "{EDA26A2F-D398-4B2A-9D9B-F183DC641A7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zinc-api", "zinc-api.csproj", "{EDA26A2F-D398-4B2A-9D9B-F183DC641A7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watcher", "..\Watcher\Watcher.csproj", "{88C4B08F-9849-4B6F-BB82-1587B7D19B38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EDA26A2F-D398-4B2A-9D9B-F183DC641A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDA26A2F-D398-4B2A-9D9B-F183DC641A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDA26A2F-D398-4B2A-9D9B-F183DC641A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88C4B08F-9849-4B6F-BB82-1587B7D19B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88C4B08F-9849-4B6F-BB82-1587B7D19B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88C4B08F-9849-4B6F-BB82-1587B7D19B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88C4B08F-9849-4B6F-BB82-1587B7D19B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

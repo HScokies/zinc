@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using zinc_api.Models.Entities;
 using zinc_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,5 +27,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
