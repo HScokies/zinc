@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Watcher;
 
-public abstract class EIBD // Абстрактная модель сущности для последующего наследования
+public class EIBD // Абстрактная модель сущности для последующего наследования
 {
-    public virtual int id { get; set; }
+    public int? id { get; set; }
     public int num { get; set; } //Индекс столбца дампа (0 = 3)
     public DateOnly date { get; set; }
     public TimeOnly time { get; set; }
@@ -28,6 +28,19 @@ public class HVP : EIBD { }//HVP_station
 public class AppDBcontext : DbContext
 {
     public DbSet<KEC1> kec1 { get; set; }
+    public DbSet<KEC2> kec2 { get; set; }
+    public DbSet<KEC_Kadmievoe> kadmievoe { get; set; }
+    public DbSet<GMC_Velc1> gmc1 { get; set; }
+    public DbSet<GMC_Velc2> gmc2 { get; set; }
+    public DbSet<SKC1> skc1 { get; set; }
+    public DbSet<SKC2> skc2 { get; set; }
+    public DbSet<GMC_Larox> larox { get; set; }
+    public DbSet<OBG1> obg1 { get; set; }
+    public DbSet<OBG2> obg2 { get; set; }
+    public DbSet<Velc_KVP5> kvp5 { get; set; }
+    public DbSet<Velc_KVP6> kvp6 { get; set; }
+    public DbSet<Vysh> vysh { get; set; }
+    public DbSet<HVP> hvp { get; set; }
 
     public AppDBcontext()
     {
