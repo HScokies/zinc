@@ -28,7 +28,7 @@ internal class Program
                     var station = new DirectoryInfo(directory).Name;
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(file);
-                    await DataParser.parseCSV(File.ReadAllText(file), station);
+                    await DataParser.parseCSV(file, station);
                 }
             }
         }

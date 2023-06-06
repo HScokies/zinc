@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Globalization;
+using System.Text;
 using Watcher;
 
 public static class DataParser
@@ -8,25 +9,35 @@ public static class DataParser
 
     private static string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
-    public static async Task parseCSV(string csvData, string station)
+    public static async Task parseCSV(string csvPath, string station)
     {
-        IEnumerable<string> data = csvData.Split('\n');
-        foreach (var row in data)
+        //IEnumerable<string> data = csvData.Split('\n');
+        using (var fs = File.OpenRead(csvPath))
+        using (BufferedStream bs = new BufferedStream(fs))
         {
-            string[] rowData = row.Split(';');
-            try
+            using (var sr = new StreamReader(bs))
             {
-                DateOnly CreationDate = DateOnly.Parse(rowData[0]); TimeOnly CreationTime = TimeOnly.Parse(rowData[1]);
-                await ReadSingleRow(CreationDate, CreationTime, rowData, ';', station);
-            }
-            catch
-            {
-                break;
-            }
+                string csvData;
+                while ((csvData = sr.ReadLine()) != null)
+                {
+                    IEnumerable<string> data = csvData.Split('\n');
+                    foreach (var row in data)
+                    {
+                        string[] rowData = row.Split(';');
+                        try
+                        {
+                            DateOnly CreationDate = DateOnly.Parse(rowData[0]); TimeOnly CreationTime = TimeOnly.Parse(rowData[1]);
+                            await ReadSingleRow(CreationDate, CreationTime, rowData, ';', station);
+                        }
+                        catch
+                        {
+                            break;
+                        }
 
+                    }
+                }
+            }
         }
-
-
     }
 
     private static async Task ReadSingleRow(DateOnly CreationDate, TimeOnly CreationTime, string[] data, char separator, string station)
