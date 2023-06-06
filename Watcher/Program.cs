@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using System.Diagnostics;
 using Watcher;
 
 internal class Program
@@ -7,7 +7,11 @@ internal class Program
     private static async Task Main(string[] args)
     {
         Appconfig.Init();
+
+        var counter = Stopwatch.StartNew();
         await csvDumper();
+        counter.Stop();
+        Console.WriteLine($"Completed in {counter.ElapsedMilliseconds}ms");
     }
 
     private static async Task csvDumper()

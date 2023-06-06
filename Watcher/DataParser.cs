@@ -5,103 +5,93 @@ using Watcher;
 
 public static class DataParser
 {
-    public static DateOnly CreationDate;
-    public static TimeOnly CreationTime;
+
     private static string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
     public static async Task parseCSV(string csvData, string station)
     {
-        string[] data = csvData.Split('\n');
-        using (AppDBcontext ctx = new AppDBcontext())
+        IEnumerable<string> data = csvData.Split('\n');
+        foreach (var row in data)
         {
-            foreach (var row in data)
+            string[] rowData = row.Split(';');
+            try
             {
-                await ReadSingleRow(row, ';', station);
+                DateOnly CreationDate = DateOnly.Parse(rowData[0]); TimeOnly CreationTime = TimeOnly.Parse(rowData[1]);
+                await ReadSingleRow(CreationDate, CreationTime, rowData, ';', station);
+            }
+            catch
+            {
+                break;
             }
 
         }
+
+
     }
 
-    private static async Task ReadSingleRow(string row, char separator, string station)
+    private static async Task ReadSingleRow(DateOnly CreationDate, TimeOnly CreationTime, string[] data, char separator, string station)
     {
-        string[] data = row.Split(separator);
+
         try
         {
-            CreationDate = DateOnly.Parse(data[0]); CreationTime = TimeOnly.Parse(data[1]);
         } catch(Exception ex) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(ex.Message);  return; }
-
         using (AppDBcontext ctx = new AppDBcontext())
         {
+            
+
             for (int i = 2; i < data.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(data[i])) { continue; }
-                var ent = new EIBD() {
-                    id = 0,
-                    date = CreationDate,
-                    time = CreationTime,
-                    num = i - 1,
-                    val = Convert.ToDouble(data[i].Replace(",", decimalSeparator))
-                };
                 switch (station)
                 {
                     case "CHPEW2":
-                        await ctx.kec1.AddAsync(ent.AutoMap<EIBD, KEC1>());
+                        await ctx.kec1.AddAsync(new KEC1() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "CHPEW3":
-                        await ctx.kec2.AddAsync(ent.AutoMap<EIBD, KEC2>());
+                        await ctx.kec2.AddAsync(new KEC2() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "HVP-Station":
-                        await ctx.hvp.AddAsync(ent.AutoMap<EIBD, HVP>());
+                        await ctx.hvp.AddAsync(new HVP() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_OBG52":
-                        await ctx.obg2.AddAsync(ent.AutoMap<EIBD, OBG2>());
+                        await ctx.obg2.AddAsync(new OBG2() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_OBG511":
-                        await ctx.obg1.AddAsync(ent.AutoMap<EIBD, OBG1>());
+                        await ctx.obg1.AddAsync(new OBG1() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_SKC42":
-                        await ctx.skc1.AddAsync(ent.AutoMap<EIBD, SKC1>());
+                        await ctx.skc1.AddAsync(new SKC1() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_SKC43":
-                        await ctx.skc2.AddAsync(ent.AutoMap<EIBD, SKC2>());
+                        await ctx.skc2.AddAsync(new SKC2() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_V5":
-                        await ctx.vysh.AddAsync(ent.AutoMap<EIBD, Vysh>());
+                        await ctx.vysh.AddAsync(new Vysh() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_VELC1":
-                        await ctx.gmc1.AddAsync(ent.AutoMap<EIBD, GMC_Velc1>());
+                        await ctx.gmc1.AddAsync(new GMC_Velc1() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "IUS_VELC2":
-                        await ctx.gmc2.AddAsync(ent.AutoMap<EIBD, GMC_Velc2>());
+                        await ctx.gmc2.AddAsync(new GMC_Velc2() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "KADMIEVOE":
-                        await ctx.kadmievoe.AddAsync(ent.AutoMap<EIBD, KEC_Kadmievoe>());
+                        await ctx.kadmievoe.AddAsync(new KEC_Kadmievoe() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "KVP61":
-                        await ctx.kvp6.AddAsync(ent.AutoMap<EIBD, Velc_KVP6>());
+                        await ctx.kvp6.AddAsync(new Velc_KVP6() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "LAROX":
-                        await ctx.larox.AddAsync(ent.AutoMap<EIBD, GMC_Larox>());
+                        await ctx.larox.AddAsync(new GMC_Larox() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     case "VELC5PC21":
-                        await ctx.kvp5.AddAsync(ent.AutoMap<EIBD, Velc_KVP5>());
+                        await ctx.kvp5.AddAsync(new Velc_KVP5() { id = 0, date = CreationDate, time = CreationTime, num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) });
                         break;
                     default:
                         Console.WriteLine($"Unknown station: {station}");
                         break;
                 }
             }
-            try
-            {
-                await ctx.SaveChangesAsync();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{CreationDate} {CreationTime} {station}: Created");
-            }
-            catch
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{CreationDate} {CreationTime} {station}: Fail");
-            }
+            await ctx.SaveChangesAsync();
         }
     }
 }
