@@ -4,7 +4,7 @@ using Watcher;
 
 public class EIBD // Абстрактная модель сущности для последующего наследования
 {
-    public int id { get; set; }
+    public long id { get; set; }
     public int num { get; set; } //Индекс столбца дампа (0 = 3)
     public DateOnly date { get; set; }
     public TimeOnly time { get; set; }

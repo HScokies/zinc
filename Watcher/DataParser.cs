@@ -5,8 +5,8 @@ using Watcher;
 
 public static class DataParser
 {
-    public static string CreationDate = null;
-    public static string CreationTime = null;
+    public static DateOnly CreationDate;
+    public static TimeOnly CreationTime;
     private static string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
     public static async Task parseCSV(string csvData, string station)
@@ -27,15 +27,21 @@ public static class DataParser
         string[] data = row.Split(separator);
         try
         {
-            CreationDate = data[0]; CreationTime = data[1];
-        } catch(IndexOutOfRangeException) { }
+            CreationDate = DateOnly.Parse(data[0]); CreationTime = TimeOnly.Parse(data[1]);
+        } catch(Exception ex) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(ex.Message);  return; }
 
         using (AppDBcontext ctx = new AppDBcontext())
         {
             for (int i = 2; i < data.Length; i++)
             {
-                if (string.IsNullOrEmpty(data[i])) { continue; }
-                var ent = new EIBD() { id = 0, date = DateOnly.Parse(CreationDate), time = TimeOnly.Parse(CreationTime), num = i - 1, val = Convert.ToDouble(data[i].Replace(",", decimalSeparator)) };
+                if (string.IsNullOrWhiteSpace(data[i])) { continue; }
+                var ent = new EIBD() {
+                    id = 0,
+                    date = CreationDate,
+                    time = CreationTime,
+                    num = i - 1,
+                    val = Convert.ToDouble(data[i].Replace(",", decimalSeparator))
+                };
                 switch (station)
                 {
                     case "CHPEW2":

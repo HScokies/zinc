@@ -22,6 +22,8 @@ internal class Program
             {
                 if (File.GetCreationTime(file) > new DateTime(2017,12,31)){
                     var station = new DirectoryInfo(directory).Name;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(file);
                     await DataParser.parseCSV(File.ReadAllText(file), station);
                 }
             }
