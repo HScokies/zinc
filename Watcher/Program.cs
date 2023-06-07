@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Watcher;
 
 internal class Program
@@ -13,22 +12,54 @@ internal class Program
         counter.Stop();
         Console.WriteLine($"Completed in {counter.ElapsedMilliseconds}ms");
     }
-
+    /*
+\\ius_ebd.zinc.ru\Opros_ST\CHPEW2\R
+\\ius_ebd.zinc.ru\Opros_ST\CHPEW3\R
+\\ius_ebd.zinc.ru\Opros_ST\KADMIEVOE\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_VELC1\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_VELC2\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_SKC42\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_SKC43\R
+\\ius_ebd.zinc.ru\Opros_ST\LAROX\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_OBG511\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_OBG52\R
+\\ius_ebd.zinc.ru\Opros_ST\VELC5PC21\R
+\\ius_ebd.zinc.ru\Opros_ST\KVP61\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_V5\R
+\\ius_ebd.zinc.ru\Opros_ST\HVP-station\R
+*/
     private static async Task csvDumper()
     {
-        string[] ExcludeDirectories = new string[] { @"\\ius_ebd_1.zinc.ru\Opros_ST\LocalHost" };
-        string[] directories = Directory.GetDirectories(Appconfig.basePath);
-        foreach (var directory in directories)
+        Console.WriteLine("Enter path to csv containing folders:");
+        List<string> CsvSource = new List<string>();
+        string floder = Console.ReadLine()!;
+        while (!string.IsNullOrWhiteSpace(floder))
         {
-            if (ExcludeDirectories.Contains(directory)) continue;
-            string[] files = Directory.GetFiles(Path.Combine(directory, "R"));
+            if (Directory.Exists(floder)) CsvSource.Add(floder);
+            else Console.WriteLine("Invalid floder:"+floder);
+            floder = Console.ReadLine();
+        }
+        Console.Clear();
+        Console.WriteLine("Starting dumping process:");
+        var minDate = new DateTime(2018, 01, 01);
+        foreach (var directory in CsvSource)
+        {
+            string[] files = Directory.GetFiles(directory, "*.csv");
             foreach (var file in files)
             {
-                if (File.GetCreationTime(file) > new DateTime(2017,12,31)){
-                    var station = new DirectoryInfo(directory).Name;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine(file);
-                    await DataParser.parseCSV(file, station);
+                
+                if (File.GetCreationTime(file) >= minDate && File.GetLastWriteTime(file) >= minDate)
+                {
+                    string station = Directory.GetParent(directory).Name;
+                    try
+                    {
+                        await DataParser.parseCSV(file, station);
+                        Console.WriteLine("[\u001b[32mOK\u001b[37m]" + file);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("[\u001b[31mERR\u001b[37m] " + ex.Message);
+                    }
                 }
             }
         }
@@ -36,7 +67,7 @@ internal class Program
     }
     private static void InitWatcher()
     {
-        using var watcher = new FileSystemWatcher(Appconfig.basePath);
+        using var watcher = new FileSystemWatcher(Appconfig.watchingPath);
 
         watcher.NotifyFilter = NotifyFilters.Attributes
                              | NotifyFilters.CreationTime
@@ -54,7 +85,7 @@ internal class Program
         watcher.Filter = "*";
         watcher.IncludeSubdirectories = true;
         watcher.EnableRaisingEvents = true;
-        Console.WriteLine($"Watching: {Appconfig.basePath}");
+        Console.WriteLine($"Watching: {Appconfig.watchingPath}");
         Console.ReadKey();
     }
     private static void OnChanged(object sender, FileSystemEventArgs e)
