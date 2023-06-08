@@ -34,7 +34,7 @@ public static class DataParser
             {
                 string query = $"INSERT INTO {Stations[station]}(num, date, time, val) VALUES ";
                 string csvData;
-                while ((csvData = sr.ReadLine()) != null)
+                while ((csvData = sr.ReadLine()!) != null)
                 {
                     IEnumerable<string> data = csvData.Split('\n');
                     foreach (var row in data)
@@ -58,7 +58,7 @@ public static class DataParser
 
     private static string ReadSingleRow(string CreationDate, string CreationTime, string[] data, char separator, string station)
     {
-        string query = null;
+        string query = null!;
         for (int i = 2; i < data.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(data[i])) { continue; }

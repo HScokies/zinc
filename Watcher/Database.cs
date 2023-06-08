@@ -2,9 +2,9 @@
 using Watcher;
 
 static public class PgDatabase{
-    static NpgsqlDataSource ds;
+    static NpgsqlDataSource ds = null!;
 
-    static public async void init()
+    static public void init()
     {
         ds = NpgsqlDataSource.Create(Appconfig.connectionString);
     }
