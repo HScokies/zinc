@@ -13,22 +13,22 @@ internal class Program
         counter.Stop();
         Console.WriteLine($"Completed in {counter.ElapsedMilliseconds}ms");
     }
-    /*    
-    \\ius_ebd.zinc.ru\Opros_ST\CHPEW2\R
-    \\ius_ebd.zinc.ru\Opros_ST\CHPEW3\R
-    \\ius_ebd.zinc.ru\Opros_ST\KADMIEVOE\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_VELC1\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_VELC2\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_SKC42\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_SKC43\R
-    \\ius_ebd.zinc.ru\Opros_ST\LAROX\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_OBG511\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_OBG52\R
-    \\ius_ebd.zinc.ru\Opros_ST\VELC5PC21\R
-    \\ius_ebd.zinc.ru\Opros_ST\KVP61\R
-    \\ius_ebd.zinc.ru\Opros_ST\IUS_V5\R
-    \\ius_ebd.zinc.ru\Opros_ST\HVP-station\R
-    */
+    /*
+\\ius_ebd.zinc.ru\Opros_ST\CHPEW2\R
+\\ius_ebd.zinc.ru\Opros_ST\CHPEW3\R
+\\ius_ebd.zinc.ru\Opros_ST\KADMIEVOE\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_VELC1\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_VELC2\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_SKC42\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_SKC43\R
+\\ius_ebd.zinc.ru\Opros_ST\LAROX\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_OBG511\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_OBG52\R
+\\ius_ebd.zinc.ru\Opros_ST\VELC5PC21\R
+\\ius_ebd.zinc.ru\Opros_ST\KVP61\R
+\\ius_ebd.zinc.ru\Opros_ST\IUS_V5\R
+\\ius_ebd.zinc.ru\Opros_ST\HVP-station\R
+*/
     private static async Task csvDumper()
     {
         Console.WriteLine("Enter path to csv containing folders:");
@@ -41,7 +41,7 @@ internal class Program
             floder = Console.ReadLine()!;
         }
         Console.Clear();
-        Console.WriteLine("Starting dumping process:");
+        Console.WriteLine("Starting dump process:");
         var minDate = new DateTime(2018, 01, 01);
         foreach (var directory in CsvSource)
         {
