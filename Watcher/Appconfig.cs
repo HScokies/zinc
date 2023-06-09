@@ -46,6 +46,8 @@ namespace Watcher
             connectionString += $"Username={Console.ReadLine()};";
             Console.Write("\n\tPassword: ");
             connectionString += $"Password={Console.ReadLine()}";
+
+            connectionString += $"timeout=60000";
             Verify();
         }
         private static void Verify()

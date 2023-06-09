@@ -9,13 +9,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace zinc_api.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class MigInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "departments",
+                name: "department",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -24,39 +24,52 @@ namespace zinc_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_departments", x => x.id);
+                    table.PrimaryKey("PK_department", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "gmc1",
+                name: "gmc_larox",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_gmc1", x => x.id);
+                    table.PrimaryKey("PK_gmc_larox", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "gmc2",
+                name: "gmc_velc1",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_gmc2", x => x.id);
+                    table.PrimaryKey("PK_gmc_velc1", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "gmc_velc2",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    val = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_gmc_velc2", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,9 +78,8 @@ namespace zinc_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -76,19 +88,18 @@ namespace zinc_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "kadmievoe",
+                name: "kec_kadmievoe",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_kadmievoe", x => x.id);
+                    table.PrimaryKey("PK_kec_kadmievoe", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,9 +108,8 @@ namespace zinc_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -113,9 +123,8 @@ namespace zinc_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -124,62 +133,13 @@ namespace zinc_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "kvp5",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
-                    val = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_kvp5", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "kvp6",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
-                    val = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_kvp6", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "larox",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
-                    val = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_larox", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "obg1",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -193,9 +153,8 @@ namespace zinc_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -209,9 +168,8 @@ namespace zinc_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -225,9 +183,8 @@ namespace zinc_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -236,14 +193,43 @@ namespace zinc_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "velc_kvp5",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    val = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_velc_kvp5", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "velc_kvp6",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    val = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_velc_kvp6", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "vysh",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num = table.Column<int>(type: "integer", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    num = table.Column<short>(type: "smallint", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     val = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -252,7 +238,7 @@ namespace zinc_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "stations",
+                name: "station",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -263,17 +249,17 @@ namespace zinc_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_stations", x => x.id);
+                    table.PrimaryKey("PK_station", x => x.id);
                     table.ForeignKey(
-                        name: "FK_stations_departments_departmentid",
+                        name: "FK_station_department_departmentid",
                         column: x => x.departmentid,
-                        principalTable: "departments",
+                        principalTable: "department",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "tech_poks",
+                name: "tech_pok",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -288,23 +274,23 @@ namespace zinc_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tech_poks", x => x.id);
+                    table.PrimaryKey("PK_tech_pok", x => x.id);
                     table.ForeignKey(
-                        name: "FK_tech_poks_departments_departmentid",
+                        name: "FK_tech_pok_department_departmentid",
                         column: x => x.departmentid,
-                        principalTable: "departments",
+                        principalTable: "department",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tech_poks_stations_stationid",
+                        name: "FK_tech_pok_station_stationid",
                         column: x => x.stationid,
-                        principalTable: "stations",
+                        principalTable: "station",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "departments",
+                table: "department",
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
@@ -318,7 +304,7 @@ namespace zinc_api.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "stations",
+                table: "station",
                 columns: new[] { "id", "departmentid", "name", "name_table" },
                 values: new object[,]
                 {
@@ -341,18 +327,18 @@ namespace zinc_api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_stations_departmentid",
-                table: "stations",
+                name: "IX_station_departmentid",
+                table: "station",
                 column: "departmentid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tech_poks_departmentid",
-                table: "tech_poks",
+                name: "IX_tech_pok_departmentid",
+                table: "tech_pok",
                 column: "departmentid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tech_poks_stationid",
-                table: "tech_poks",
+                name: "IX_tech_pok_stationid",
+                table: "tech_pok",
                 column: "stationid");
         }
 
@@ -360,31 +346,25 @@ namespace zinc_api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "gmc1");
+                name: "gmc_larox");
 
             migrationBuilder.DropTable(
-                name: "gmc2");
+                name: "gmc_velc1");
+
+            migrationBuilder.DropTable(
+                name: "gmc_velc2");
 
             migrationBuilder.DropTable(
                 name: "hvp");
 
             migrationBuilder.DropTable(
-                name: "kadmievoe");
+                name: "kec_kadmievoe");
 
             migrationBuilder.DropTable(
                 name: "kec1");
 
             migrationBuilder.DropTable(
                 name: "kec2");
-
-            migrationBuilder.DropTable(
-                name: "kvp5");
-
-            migrationBuilder.DropTable(
-                name: "kvp6");
-
-            migrationBuilder.DropTable(
-                name: "larox");
 
             migrationBuilder.DropTable(
                 name: "obg1");
@@ -399,16 +379,22 @@ namespace zinc_api.Migrations
                 name: "skc2");
 
             migrationBuilder.DropTable(
-                name: "tech_poks");
+                name: "tech_pok");
+
+            migrationBuilder.DropTable(
+                name: "velc_kvp5");
+
+            migrationBuilder.DropTable(
+                name: "velc_kvp6");
 
             migrationBuilder.DropTable(
                 name: "vysh");
 
             migrationBuilder.DropTable(
-                name: "stations");
+                name: "station");
 
             migrationBuilder.DropTable(
-                name: "departments");
+                name: "department");
         }
     }
 }

@@ -11,7 +11,7 @@ public static class DataParser
         { "CHPEW3", "kec2" },
         { "KADMIEVOE", "kec_kadmievoe" },
         { "IUS_VELC1", "gmc_velc1" },
-        { "IUS_VELC2", "gmc_Velc2" },
+        { "IUS_VELC2", "gmc_velc2" },
         { "IUS_SKC42", "skc1" },
         { "IUS_SKC43", "skc2" },
         { "LAROX", "gmc_larox" },
@@ -25,14 +25,14 @@ public static class DataParser
     };
 
 
-    public static async Task parseCSV(string csvPath, string station)
+    public static async Task parse(string csvPath, string station)
     {
         using (var fs = File.OpenRead(csvPath))
         using (BufferedStream bs = new BufferedStream(fs))
         {
             using (var sr = new StreamReader(bs))
             {
-                string query = $"INSERT INTO {Stations[station]}(num, date, time, val) VALUES ";
+                string query = $"INSERT INTO {Stations[station]}(num, timestamp, val) VALUES ";
                 string csvData;
                 while ((csvData = sr.ReadLine()!) != null)
                 {
@@ -62,7 +62,7 @@ public static class DataParser
         for (int i = 2; i < data.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(data[i])) { continue; }
-            query += $"({i-1}, '{CreationDate}', '{CreationTime}', {data[i].Replace(",",".")}),";
+            query += $"({i-1}, '{CreationDate} {CreationTime}', {data[i].Replace(",",".")}),";
         }
         return query;
     }

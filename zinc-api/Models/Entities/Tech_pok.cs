@@ -7,7 +7,6 @@ namespace zinc_api.Models.Entities
     {
         [Key]
         public int id { get; set; }
-        [Column(TypeName = "date")]
         DateOnly period { get; set; } // Для уточнения наименования аттрибутов
         public int num { get; set; }
         public int dep_id { get; set; }

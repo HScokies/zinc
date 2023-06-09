@@ -8,21 +8,21 @@ namespace zinc_api.Services
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         //Сущности БД
-        public DbSet<Department> departments { get; set; }
-        public DbSet<Station> stations { get; set; }
-        public DbSet<Tech_pok> tech_poks { get; set; }
+        public DbSet<Department> department { get; set; }
+        public DbSet<Station> station { get; set; }
+        public DbSet<Tech_pok> tech_pok { get; set; }
         public DbSet<KEC1> kec1 { get; set; }
         public DbSet<KEC2> kec2 { get; set; }
-        public DbSet<KEC_Kadmievoe> kadmievoe { get; set; }
-        public DbSet<GMC_Velc1> gmc1 { get; set; }
-        public DbSet<GMC_Velc2> gmc2 { get; set; }
+        public DbSet<KEC_Kadmievoe> kec_kadmievoe { get; set; }
+        public DbSet<GMC_Velc1> gmc_velc1 { get; set; }
+        public DbSet<GMC_Velc2> gmc_velc2 { get; set; }
         public DbSet<SKC1> skc1 { get; set; }
         public DbSet<SKC2> skc2 { get; set; }
-        public DbSet<GMC_Larox> larox { get; set; }
+        public DbSet<GMC_Larox> gmc_larox { get; set; }
         public DbSet<OBG1> obg1 { get; set; }
         public DbSet<OBG2> obg2 { get; set; }
-        public DbSet<Velc_KVP5> kvp5 { get; set; }
-        public DbSet<Velc_KVP6> kvp6 { get; set; }
+        public DbSet<Velc_KVP5> velc_kvp5 { get; set; }
+        public DbSet<Velc_KVP6> velc_kvp6 { get; set; }
         public DbSet<Vysh> vysh { get; set; }
         public DbSet<HVP> hvp { get; set; }
 

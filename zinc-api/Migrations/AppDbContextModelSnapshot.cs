@@ -36,7 +36,7 @@ namespace zinc_api.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("departments");
+                    b.ToTable("department");
 
                     b.HasData(
                         new
@@ -84,21 +84,18 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
 
                     b.HasKey("id");
 
-                    b.ToTable("larox");
+                    b.ToTable("gmc_larox");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Velc1", b =>
@@ -109,21 +106,18 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
 
                     b.HasKey("id");
 
-                    b.ToTable("gmc1");
+                    b.ToTable("gmc_velc1");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Velc2", b =>
@@ -134,21 +128,18 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
 
                     b.HasKey("id");
 
-                    b.ToTable("gmc2");
+                    b.ToTable("gmc_velc2");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.HVP", b =>
@@ -159,14 +150,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -184,14 +172,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -209,14 +194,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -234,21 +216,18 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
 
                     b.HasKey("id");
 
-                    b.ToTable("kadmievoe");
+                    b.ToTable("kec_kadmievoe");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.OBG1", b =>
@@ -259,14 +238,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -284,14 +260,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -309,14 +282,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -334,14 +304,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
@@ -374,7 +341,7 @@ namespace zinc_api.Migrations
 
                     b.HasIndex("departmentid");
 
-                    b.ToTable("stations");
+                    b.ToTable("station");
 
                     b.HasData(
                         new
@@ -526,7 +493,7 @@ namespace zinc_api.Migrations
 
                     b.HasIndex("stationid");
 
-                    b.ToTable("tech_poks");
+                    b.ToTable("tech_pok");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Velc_KVP5", b =>
@@ -537,21 +504,18 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
 
                     b.HasKey("id");
 
-                    b.ToTable("kvp5");
+                    b.ToTable("velc_kvp5");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Velc_KVP6", b =>
@@ -562,21 +526,18 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
 
                     b.HasKey("id");
 
-                    b.ToTable("kvp6");
+                    b.ToTable("velc_kvp6");
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Vysh", b =>
@@ -587,14 +548,11 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
+                    b.Property<short>("num")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("num")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("val")
                         .HasColumnType("double precision");
