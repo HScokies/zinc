@@ -1,75 +1,121 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Watcher
 {
     static class Appconfig
     {
-        private static string configPath = Path.Combine("data", "appconfig.cfg");
-        public static string errorsLog = Path.Combine("data","errors.log");
-        public static string connectionString = string.Empty;
+        private static string BASE_URL = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WatcherData");
+        private static string dbconfig = "dbconfig.json";
 
+        public static string errorsLog = Path.Combine(BASE_URL, "Errors.log");
+
+
+        public static ConfigModel cfg = new();
+        
         public static void Init()
         {
-            if (!File.Exists(configPath))
+            if (!Directory.Exists(BASE_URL))
             {
-                Directory.CreateDirectory("data");
+                Directory.CreateDirectory(BASE_URL);
                 CreateConfig();
             }
-            string config = File.ReadAllText(configPath);
-            if (config.Trim().Length == 0)
+            if (!File.Exists(Path.Combine(BASE_URL, dbconfig)))
             {
                 CreateConfig();
             }
             else
             {
-                var cfg = config.Split('\n');
-                connectionString = cfg[0];
-                PgDatabase.init();
+                try
+                {
+                    using (FileStream fs = new FileStream(Path.Combine(BASE_URL, dbconfig), FileMode.OpenOrCreate))
+                    {
+                        cfg = JsonSerializer.Deserialize<ConfigModel>(fs)!;
+                    }
+                    PgDatabase.init($"Host={cfg.SERVER};Port={cfg.PORT};Database={cfg.DATABASE};Username={cfg.USER};Password={cfg.PASSWORD};timeout=1024");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.ReadKey();
+                    CreateConfig();
+                }
             }
+
             if (!File.Exists(errorsLog)) File.Create(errorsLog);
         }
-        private static void CreateConfig()
-        {
-            Console.Clear();
-            Console.WriteLine("Database connection string builder");
-            Console.Write("\n\tHost: ");
-            connectionString = $"Host={Console.ReadLine()};";
-            Console.Write("\n\tPort: ");
-            connectionString += $"Port={Console.ReadLine()};";
-            Console.Write("\n\tDatabase: ");
-            connectionString += $"Database={Console.ReadLine()};";
-            Console.Write("\n\tUser:");
-            connectionString += $"Username={Console.ReadLine()};";
-            Console.Write("\n\tPassword: ");
-            connectionString += $"Password={Console.ReadLine()}";
 
-            connectionString += $"timeout=60000";
-            Verify();
-        }
-        private static void Verify()
+        #region Config creation
+        public static void CreateConfig()
         {
-            Console.Clear();
-            Console.WriteLine("Verify configuration");
-            Console.WriteLine($"Connection string: {connectionString}");
-            Console.Write("Is this correct? (y/n)");
-            string response = Console.ReadKey().KeyChar.ToString().Trim().ToLower();
-            switch (response)
+            DbConfig();
+            using (FileStream fs = new FileStream(Path.Combine(BASE_URL, dbconfig), FileMode.OpenOrCreate))
             {
-                case "y":
-                    File.WriteAllText(configPath, connectionString);
-                    Console.Clear();
-                    break;
-                case "n":
-                    CreateConfig();
-                    break;
-                default:
-                    Verify();
-                    break;
+                JsonSerializer.Serialize<ConfigModel>(fs, cfg);
+                Console.WriteLine($"Created: {Path.Combine(BASE_URL, dbconfig)}");
             }
         }
+
+        private static void DbConfig()
+        {
+            Console.Clear();
+            Console.WriteLine("Database connection configuration");
+            string input = null!;
+            
+            Console.Write("\n\tServer [localhost]:");
+            input = Console.ReadLine()!;
+            cfg.SERVER = !string.IsNullOrWhiteSpace(input)?  input : "localhost";
+
+            Console.Write("\n\tDatabase [postgres]:");
+            input = Console.ReadLine()!;
+            cfg.DATABASE = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
+
+            Console.Write("\n\tPort [5432]:");
+            input = Console.ReadLine()!;
+            cfg.PORT = !string.IsNullOrWhiteSpace(input) ? input : "5432";
+
+            Console.Write("\n\tUsername [postgres]:");
+            input = Console.ReadLine()!;
+            cfg.USER = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
+
+            Console.Write($"\n\tPassword for user {cfg.USER}:");
+            input = Console.ReadLine()!;
+            cfg.PASSWORD = input;
+
+            try
+            {
+                PgDatabase.init($"Host={cfg.SERVER};Port={cfg.PORT};Database={cfg.DATABASE};Username={cfg.USER};Password={cfg.PASSWORD};timeout=1024");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+                DbConfig();
+            }
+        }
+    
     }
+        class ConfigModel
+        {
+            public string SERVER {get; set;}
+            public string PORT { get; set; }
+            public string DATABASE { get; set; }
+            public string USER { get; set; }
+            public string PASSWORD { get; set; }
+        public ConfigModel(string server = "localhost", string port = "5432", string database = "postgres", string user = "postgres", string password =  null!)
+            {
+                SERVER = server;
+                PORT = port;
+                DATABASE = database;
+                USER = user;
+                PASSWORD = password;
+            }
+    }
+    #endregion
 }

@@ -1,35 +1,15 @@
-﻿using System.Diagnostics;
-using System.IO;
-using Watcher;
+﻿using Watcher;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
+    private static void Main(string[] args)
     {
         Appconfig.Init();
+        OpenMenu();
+        //csvDumper();
 
-        var counter = Stopwatch.StartNew();
-        await csvDumper();
-        counter.Stop();
-        Console.WriteLine($"Completed in {counter.ElapsedMilliseconds}ms");
     }
-    /*
-\\ius_ebd.zinc.ru\Opros_ST\CHPEW2\R
-\\ius_ebd.zinc.ru\Opros_ST\CHPEW3\R
-\\ius_ebd.zinc.ru\Opros_ST\KADMIEVOE\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_VELC1\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_VELC2\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_SKC42\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_SKC43\R
-\\ius_ebd.zinc.ru\Opros_ST\LAROX\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_OBG511\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_OBG52\R
-\\ius_ebd.zinc.ru\Opros_ST\VELC5PC21\R
-\\ius_ebd.zinc.ru\Opros_ST\KVP61\R
-\\ius_ebd.zinc.ru\Opros_ST\IUS_V5\R
-\\ius_ebd.zinc.ru\Opros_ST\HVP-station\R
-*/
-    private static async Task csvDumper()
+    private static void csvDumper()
     {
         Console.WriteLine("Enter path to csv containing folders:");
         List<string> CsvSource = new List<string>();
@@ -42,19 +22,19 @@ internal class Program
         }
         Console.Clear();
         Console.WriteLine("Starting dump process:");
-        var minDate = new DateTime(2018, 01, 01);
-        foreach (var directory in CsvSource)
+        Parallel.ForEach(CsvSource, (directory) =>
         {
+            var minDate = new DateTime(2018, 01, 01);
             string[] files = Directory.GetFiles(directory, "*.csv");
             foreach (var file in files)
             {
-                
+
                 if (File.GetCreationTime(file) >= minDate && File.GetLastWriteTime(file) >= minDate)
                 {
                     string station = Directory.GetParent(directory)!.Name;
                     try
                     {
-                        await DataParser.parseCSV(file, station);
+                        DataParser.parse(file, station);
                         Console.WriteLine("[\u001b[32mOK\u001b[37m]" + file);
                     }
                     catch (Exception ex)
@@ -64,8 +44,16 @@ internal class Program
                     }
                 }
             }
-        }
+        });
+
+
         Console.WriteLine("Dump completed!");
+    }
+
+    private static void fileWatcher()
+    {
+        Console.Write("Enter watching directory:");
+
     }
 
     private static void Logger(DateTime timestamp, String file, String Message)
@@ -78,4 +66,53 @@ internal class Program
         }
     }
 
+    private static void OpenMenu()
+    {
+        Console.Clear();
+        Console.CursorVisible = false;
+        (int left, int top) = Console.GetCursorPosition();
+        int currentOption = 2;
+
+        string active = "\u001b[32m";
+        string inactive = "\u001b[0m";
+
+        ConsoleKeyInfo key;
+        bool isSelected = false;
+
+        while (!isSelected)
+        {
+            Console.SetCursorPosition(left, top);
+            Console.WriteLine($"{(currentOption == 2 ? active : "")}File Watcher{inactive}");
+            Console.WriteLine($"{(currentOption == 1 ? active : "")}CSV Dumper{inactive}");
+            Console.WriteLine($"{(currentOption == 0 ? active : "")}Database config{inactive}");
+            key = Console.ReadKey(false);
+            switch ( key.Key )
+            {
+                case ConsoleKey.UpArrow:
+                    currentOption = (currentOption + 1) % 3;
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    currentOption = (currentOption - 1) < 0? 2 : (currentOption - 1) % 3;
+                    break;
+
+                case ConsoleKey.Enter:
+                    isSelected = true;
+                    break;
+            }
+        }
+        Console.Clear() ;
+        switch ( currentOption )
+        {
+            case 0:
+                Appconfig.CreateConfig();
+                break;
+            case 1:
+                csvDumper();
+                break;
+            case 2:
+                fileWatcher();
+                break;
+        }
+    }
 }

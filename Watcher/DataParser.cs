@@ -25,7 +25,7 @@ public static class DataParser
     };
 
 
-    public static async Task parse(string csvPath, string station)
+    public static void parse(string csvPath, string station)
     {
         using (var fs = File.OpenRead(csvPath))
         using (BufferedStream bs = new BufferedStream(fs))
@@ -51,7 +51,7 @@ public static class DataParser
 
                     }
                 }
-                await PgDatabase.ExecuteAsync(query.Substring(0, query.Length - 1));
+                PgDatabase.Execute(query.Substring(0, query.Length - 1));
             }
         }
     }

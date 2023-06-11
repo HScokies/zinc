@@ -4,15 +4,17 @@ using Watcher;
 static public class PgDatabase{
     static NpgsqlDataSource ds = null!;
 
-    static public void init()
+    static public void init(string connection)
     {
-        ds = NpgsqlDataSource.Create(Appconfig.connectionString);
+        ds = NpgsqlDataSource.Create(connection);
+        ds.OpenConnection();
     }
 
-    static public async Task ExecuteAsync(string query)
+
+    static public void Execute(string query)
     {
-        await using var command = ds.CreateCommand(query);
-        await command.ExecuteNonQueryAsync();
+        using var command = ds.CreateCommand(query);
+        command.ExecuteNonQuery();
     }
 }
 
