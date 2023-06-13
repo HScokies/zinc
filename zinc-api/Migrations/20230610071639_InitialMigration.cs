@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace zinc_api.Migrations
 {
     /// <inheritdoc />
-    public partial class MigInit : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,7 @@ namespace zinc_api.Migrations
                 name: "gmc_larox",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -46,7 +46,7 @@ namespace zinc_api.Migrations
                 name: "gmc_velc1",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -61,7 +61,7 @@ namespace zinc_api.Migrations
                 name: "gmc_velc2",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -76,7 +76,7 @@ namespace zinc_api.Migrations
                 name: "hvp",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -91,7 +91,7 @@ namespace zinc_api.Migrations
                 name: "kec_kadmievoe",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -106,7 +106,7 @@ namespace zinc_api.Migrations
                 name: "kec1",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -121,7 +121,7 @@ namespace zinc_api.Migrations
                 name: "kec2",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -136,7 +136,7 @@ namespace zinc_api.Migrations
                 name: "obg1",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -151,7 +151,7 @@ namespace zinc_api.Migrations
                 name: "obg2",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -166,7 +166,7 @@ namespace zinc_api.Migrations
                 name: "skc1",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -181,7 +181,7 @@ namespace zinc_api.Migrations
                 name: "skc2",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -196,7 +196,7 @@ namespace zinc_api.Migrations
                 name: "velc_kvp5",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -211,7 +211,7 @@ namespace zinc_api.Migrations
                 name: "velc_kvp6",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -226,7 +226,7 @@ namespace zinc_api.Migrations
                 name: "vysh",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<short>(type: "smallint", nullable: false),
                     timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -266,7 +266,6 @@ namespace zinc_api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     num = table.Column<int>(type: "integer", nullable: false),
                     dep_id = table.Column<int>(type: "integer", nullable: false),
-                    departmentid = table.Column<int>(type: "integer", nullable: false),
                     station_id = table.Column<int>(type: "integer", nullable: false),
                     stationid = table.Column<int>(type: "integer", nullable: false),
                     name = table.Column<string>(type: "text", nullable: true),
@@ -275,12 +274,6 @@ namespace zinc_api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tech_pok", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_tech_pok_department_departmentid",
-                        column: x => x.departmentid,
-                        principalTable: "department",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tech_pok_station_stationid",
                         column: x => x.stationid,
@@ -329,11 +322,6 @@ namespace zinc_api.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_station_departmentid",
                 table: "station",
-                column: "departmentid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tech_pok_departmentid",
-                table: "tech_pok",
                 column: "departmentid");
 
             migrationBuilder.CreateIndex(

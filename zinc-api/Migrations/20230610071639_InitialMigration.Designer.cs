@@ -12,8 +12,8 @@ using zinc_api.Services;
 namespace zinc_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230609115937_MigInit")]
-    partial class MigInit
+    [Migration("20230610071639_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,11 +81,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Larox", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -103,11 +103,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Velc1", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -125,11 +125,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Velc2", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -147,11 +147,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.HVP", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -169,11 +169,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.KEC1", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -191,11 +191,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.KEC2", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -213,11 +213,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.KEC_Kadmievoe", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -235,11 +235,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.OBG1", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -257,11 +257,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.OBG2", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -279,11 +279,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.SKC1", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -301,11 +301,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.SKC2", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -472,9 +472,6 @@ namespace zinc_api.Migrations
                     b.Property<int>("dep_id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("departmentid")
-                        .HasColumnType("integer");
-
                     b.Property<string>("name")
                         .HasColumnType("text");
 
@@ -492,8 +489,6 @@ namespace zinc_api.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("departmentid");
-
                     b.HasIndex("stationid");
 
                     b.ToTable("tech_pok");
@@ -501,11 +496,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.Velc_KVP5", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -523,11 +518,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.Velc_KVP6", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -545,11 +540,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.Vysh", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.Property<short>("num")
                         .HasColumnType("smallint");
@@ -578,19 +573,11 @@ namespace zinc_api.Migrations
 
             modelBuilder.Entity("zinc_api.Models.Entities.Tech_pok", b =>
                 {
-                    b.HasOne("zinc_api.Models.Entities.Department", "department")
-                        .WithMany()
-                        .HasForeignKey("departmentid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("zinc_api.Models.Entities.Station", "station")
                         .WithMany()
                         .HasForeignKey("stationid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("department");
 
                     b.Navigation("station");
                 });

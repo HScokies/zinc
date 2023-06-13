@@ -75,15 +75,16 @@ internal class Program
     private static void onChange(object sender, FileSystemEventArgs e)
     {
         string station = Directory.GetParent(e.FullPath)!.Name;
+        if (station == "LocalHost") return;
         try
         {
-            DataParser.parseCsv(e.FullPath, station);
+            DataParser.parseDat(e.FullPath, station);
             Console.WriteLine("[\u001b[32mOK\u001b[37m]" + e.FullPath);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"[\u001b[31mERR\u001b[37m] {e.FullPath}");
-            Logger(DateTime.Now, e.FullPath, ex.Message);
+            Logger(DateTime.Now, e.FullPath, $"{ex.Message}\n{File.ReadAllText(e.FullPath)}");
         }
     }
 

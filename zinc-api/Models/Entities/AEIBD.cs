@@ -6,7 +6,7 @@ namespace zinc_api.Models.Entities
     public abstract class EIBD // Абстрактная модель сущности для последующего наследования
     {
         [Key]
-        public virtual int id { get; set; }
+        public long id { get; set; }
         public  Int16 num { get; set; } //Индекс столбца дампа (0 = 3)
         public  DateTime timestamp { get; set; }
         public  double val { get; set; } //Знч-е столбца дампа

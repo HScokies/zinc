@@ -29,6 +29,7 @@ namespace zinc_api.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Department>().HasData(new {id=1, name="OBG" });
             modelBuilder.Entity<Department>().HasData(new { id = 2, name = "VELC" });
             modelBuilder.Entity<Department>().HasData(new { id = 3, name = "GMC" });

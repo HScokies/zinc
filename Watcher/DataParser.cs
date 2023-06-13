@@ -20,13 +20,12 @@ public static class DataParser
         { "VELC5PC21", "velc_kvp5" },
         { "KVP61", "velc_kvp6" },
         { "IUS_V5", "vysh" },
-        { "HVP-station", "hvp" }
+        { "HVP-Station", "hvp" }
 
     };
 
     public static void parseDat(string datPath, string station)
     {
-        station = Stations[station];
         string query = $"INSERT INTO {Stations[station]}(num, timestamp, val) VALUES ";
 
         using (var fs = File.OpenRead(datPath))
@@ -38,7 +37,7 @@ public static class DataParser
                 query += ReadSingleRow(rowData[0], rowData[1], rowData);
             }
         }
-        PgDatabase.Execute(query);
+        PgDatabase.Execute(query.Substring(0, query.Length - 1));
     }
 
     public static void parseCsv(string csvPath, string station)
