@@ -24,8 +24,24 @@ public static class DataParser
 
     };
 
+    public static void parseDat(string datPath, string station)
+    {
+        station = Stations[station];
+        string query = $"INSERT INTO {Stations[station]}(num, timestamp, val) VALUES ";
 
-    public static void parse(string csvPath, string station)
+        using (var fs = File.OpenRead(datPath))
+        using (BufferedStream bs = new BufferedStream(fs))
+        {
+            using (var sr = new StreamReader(bs))
+            {
+                string[] rowData = sr.ReadLine()!.Split(';');
+                query += ReadSingleRow(rowData[0], rowData[1], rowData);
+            }
+        }
+        PgDatabase.Execute(query);
+    }
+
+    public static void parseCsv(string csvPath, string station)
     {
         using (var fs = File.OpenRead(csvPath))
         using (BufferedStream bs = new BufferedStream(fs))
@@ -42,7 +58,7 @@ public static class DataParser
                         string[] rowData = row.Split(';');
                         try
                         {
-                            query+=ReadSingleRow(rowData[0], rowData[1], rowData, ';', station);
+                            query+=ReadSingleRow(rowData[0], rowData[1], rowData);
                         }
                         catch
                         {
@@ -56,7 +72,7 @@ public static class DataParser
         }
     }
 
-    private static string ReadSingleRow(string CreationDate, string CreationTime, string[] data, char separator, string station)
+    private static string ReadSingleRow(string CreationDate, string CreationTime, string[] data)
     {
         string query = null!;
         for (int i = 2; i < data.Length; i++)

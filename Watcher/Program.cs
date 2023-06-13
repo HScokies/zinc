@@ -34,7 +34,7 @@ internal class Program
                     string station = Directory.GetParent(directory)!.Name;
                     try
                     {
-                        DataParser.parse(file, station);
+                        DataParser.parseCsv(file, station);
                         Console.WriteLine("[\u001b[32mOK\u001b[37m]" + file);
                     }
                     catch (Exception ex)
@@ -53,7 +53,38 @@ internal class Program
     private static void fileWatcher()
     {
         Console.Write("Enter watching directory:");
+        string directory = Console.ReadLine()!;
+        while (!Directory.Exists(directory))
+        {
+            Console.WriteLine($"Directory:{directory} is not found!");
+            directory = Console.ReadLine()!;
+        }
+        Console.Clear();
+        Console.WriteLine("Initializing the watcher...");
+        
+        using FileSystemWatcher watcher = new FileSystemWatcher(directory);
+        watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite;
+        watcher.Changed += onChange;
+        watcher.Filter = "tek.dat";
+        watcher.IncludeSubdirectories = true;
+        watcher.EnableRaisingEvents = true;
+        Console.WriteLine("Press enter to exit.");
+        Console.ReadKey();
+    }
 
+    private static void onChange(object sender, FileSystemEventArgs e)
+    {
+        string station = Directory.GetParent(e.FullPath)!.Name;
+        try
+        {
+            DataParser.parseCsv(e.FullPath, station);
+            Console.WriteLine("[\u001b[32mOK\u001b[37m]" + e.FullPath);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[\u001b[31mERR\u001b[37m] {e.FullPath}");
+            Logger(DateTime.Now, e.FullPath, ex.Message);
+        }
     }
 
     private static void Logger(DateTime timestamp, String file, String Message)
@@ -85,7 +116,7 @@ internal class Program
             Console.WriteLine($"{(currentOption == 2 ? active : "")}File Watcher{inactive}");
             Console.WriteLine($"{(currentOption == 1 ? active : "")}CSV Dumper{inactive}");
             Console.WriteLine($"{(currentOption == 0 ? active : "")}Database config{inactive}");
-            key = Console.ReadKey(false);
+            key = Console.ReadKey(true);
             switch ( key.Key )
             {
                 case ConsoleKey.UpArrow:
