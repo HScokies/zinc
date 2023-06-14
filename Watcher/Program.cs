@@ -1,4 +1,5 @@
-﻿using Watcher;
+﻿using System.Diagnostics;
+using Watcher;
 
 internal class Program
 {
@@ -20,6 +21,7 @@ internal class Program
             else Console.WriteLine("Invalid floder:"+floder);
             floder = Console.ReadLine()!;
         }
+        var timer = Stopwatch.StartNew();
         Console.Clear();
         Console.WriteLine("Starting dump process:");
         Parallel.ForEach(CsvSource, (directory) =>
@@ -46,8 +48,8 @@ internal class Program
             }
         });
 
-
-        Console.WriteLine("Dump completed!");
+        timer.Stop();
+        Console.WriteLine($"Dump completed in {timer.ElapsedMilliseconds}");
     }
 
     private static void fileWatcher()

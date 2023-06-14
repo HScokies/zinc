@@ -66,7 +66,8 @@ public static class DataParser
 
                     }
                 }
-                PgDatabase.Execute(query.Substring(0, query.Length - 1));
+                Console.WriteLine(query.Substring(0, query.Length - 1));
+                //PgDatabase.Execute(query.Substring(0, query.Length - 1));
             }
         }
     }
