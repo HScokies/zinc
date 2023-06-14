@@ -20,7 +20,7 @@ public static class DataParser
         { "VELC5PC21", "velc_kvp5" },
         { "KVP61", "velc_kvp6" },
         { "IUS_V5", "vysh" },
-        { "HVP-Station", "hvp" }
+        { "HVP-station", "hvp" }
 
     };
 
@@ -66,8 +66,7 @@ public static class DataParser
 
                     }
                 }
-                Console.WriteLine(query.Substring(0, query.Length - 1));
-                //PgDatabase.Execute(query.Substring(0, query.Length - 1));
+                PgDatabase.Execute(query.Substring(0, query.Length - 1));
             }
         }
     }
