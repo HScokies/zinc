@@ -7,12 +7,12 @@ namespace zinc_api.Models.Entities
     {
         [Key]
         public int id { get; set; }
-        DateOnly period { get; set; } // Для уточнения наименования аттрибутов
-        public int num { get; set; }
-        public int dep_id { get; set; }
         public int station_id { get; set; }
         public Station station { get; set; } = new();
+        public int num { get; set; }
+        DateOnly period { get; set; } // Для уточнения наименования аттрибутов
         public string? name { get; set; } = null!;
         public string? uom { get; set; }
+
     }
 }

@@ -466,9 +466,6 @@ namespace zinc_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int>("dep_id")
-                        .HasColumnType("integer");
-
                     b.Property<string>("name")
                         .HasColumnType("text");
 

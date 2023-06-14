@@ -8,8 +8,9 @@ namespace zinc_api.Models.Entities
         [Key]
         public long id { get; set; }
         public  Int16 num { get; set; } //Индекс столбца дампа (0 = 3)
+        public double val { get; set; } //Знч-е столбца дампа
         public  DateTime timestamp { get; set; }
-        public  double val { get; set; } //Знч-е столбца дампа
+
     }
 
     public class KEC1 : EIBD { }//CHPEW2
