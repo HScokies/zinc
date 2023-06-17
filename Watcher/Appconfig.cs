@@ -11,11 +11,28 @@ namespace Watcher
 {
     static class Appconfig
     {
+        #region Station aliases
+                public static Dictionary<string, string> Stations = new Dictionary<string, string>()
+                {
+                    { "CHPEW2", "kec1"},
+                    { "CHPEW3", "kec2" },
+                    { "KADMIEVOE", "kec_kadmievoe" },
+                    { "IUS_VELC1", "gmc_velc1" },
+                    { "IUS_VELC2", "gmc_velc2" },
+                    { "IUS_SKC42", "skc1" },
+                    { "IUS_SKC43", "skc2" },
+                    { "LAROX", "gmc_larox" },
+                    { "IUS_OBG511", "obg1" },
+                    { "IUS_OBG52", "obg2" },
+                    { "VELC5PC21", "velc_kvp5" },
+                    { "KVP61", "velc_kvp6" },
+                    { "IUS_V5", "vysh" },
+                    { "HVP-Station", "hvp" }
+                };
+                #endregion
         public static string BASE_URL = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WatcherData");
         private static string dbconfig = "dbconfig.json";
-
         public static string errorsLog = Path.Combine(BASE_URL, "Errors.log");
-
         public static ConfigModel dbcfg = new();
 
         public static void Init()
@@ -37,7 +54,7 @@ namespace Watcher
                     {
                         dbcfg = JsonSerializer.Deserialize<ConfigModel>(fs)!;
                     }
-                    PgDatabase.Init($"Host={dbcfg.SERVER};Port={dbcfg.PORT};Database={dbcfg.DATABASE};Username={dbcfg.USER};Password={dbcfg.PASSWORD};timeout=1024");
+                    ClickhouseDB.Init(dbcfg);
                 }
                 catch (Exception ex)
                 {
@@ -49,8 +66,7 @@ namespace Watcher
 
             if (!File.Exists(errorsLog)) File.Create(errorsLog);
         }
-
-        #region Config creation
+        #region DB Config creator
         public static void CreateConfig()
         {
             DbConfig();
@@ -66,22 +82,22 @@ namespace Watcher
             Console.Clear();
             Console.WriteLine("Database connection configuration");
             string input = null!;
-            
+
             Console.Write("\n\tServer [localhost]:");
             input = Console.ReadLine()!;
-            dbcfg.SERVER = !string.IsNullOrWhiteSpace(input)?  input : "localhost";
+            dbcfg.SERVER = !string.IsNullOrWhiteSpace(input) ? input : "localhost";
 
-            Console.Write("\n\tDatabase [postgres]:");
+            Console.Write("\n\tDatabase [default]:");
             input = Console.ReadLine()!;
-            dbcfg.DATABASE = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
+            dbcfg.DATABASE = !string.IsNullOrWhiteSpace(input) ? input : "default";
 
-            Console.Write("\n\tPort [5432]:");
+            Console.Write("\n\tPort [8123]:");
             input = Console.ReadLine()!;
-            dbcfg.PORT = !string.IsNullOrWhiteSpace(input) ? input : "5432";
+            dbcfg.PORT = !string.IsNullOrWhiteSpace(input) ? Convert.ToUInt16(input) : (ushort)8123;
 
-            Console.Write("\n\tUsername [postgres]:");
+            Console.Write("\n\tUsername [default]:");
             input = Console.ReadLine()!;
-            dbcfg.USER = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
+            dbcfg.USER = !string.IsNullOrWhiteSpace(input) ? input : "default";
 
             Console.Write($"\n\tPassword for user {dbcfg.USER}:");
             input = Console.ReadLine()!;
@@ -89,7 +105,7 @@ namespace Watcher
 
             try
             {
-                PgDatabase.Init($"Host={dbcfg.SERVER};Port={dbcfg.PORT};Database={dbcfg.DATABASE};Username={dbcfg.USER};Password={dbcfg.PASSWORD};timeout=1024");
+                ClickhouseDB.Init(dbcfg);
             }
             catch (Exception e)
             {
@@ -98,16 +114,18 @@ namespace Watcher
                 DbConfig();
             }
         }
-    
+
     }
-    class ConfigModel
+#endregion
+        #region DB config model
+    public class ConfigModel
     {
         public string SERVER { get; set; } = null!;
-        public string PORT { get; set; } = null!;
+        public ushort PORT { get; set; }
         public string DATABASE { get; set; } = null!;
         public string USER { get; set; } = null!;
         public string PASSWORD { get; set; } = null!;
-        public ConfigModel(string server = "localhost", string port = "5432", string database = "postgres", string user = "postgres", string password = null!)
+        public ConfigModel(string server = "localhost", ushort port = 8123, string database = "default", string user = "default", string password = null!)
         {
             SERVER = server;
             PORT = port;
@@ -116,5 +134,5 @@ namespace Watcher
             PASSWORD = password;
         }
     }
-    #endregion
+#endregion
 }

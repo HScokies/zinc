@@ -9,6 +9,7 @@ services:
     restart: always
     ports:
       - '8123:8123'
+      - '9000:9000'
     environment:
       - CLICKHOUSE_DB=DevDB
       - CLICKHOUSE_USER=SA

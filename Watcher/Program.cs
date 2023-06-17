@@ -6,7 +6,8 @@ internal class Program
     private static void Main(string[] args)
     {
         Appconfig.Init();
-        OpenMenu();
+        ClickhouseDB.InitMigration();
+        //OpenMenu();
     }
     private static void csvDumper()
     {
