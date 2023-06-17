@@ -1,0 +1,18 @@
+version: '3.4'
+networks:
+  clickhouse:
+
+services:
+  clickhouse-database:
+    container_name: clickhouse-database
+    image: clickhouse/clickhouse-server:latest
+    restart: always
+    ports:
+      - '8123:8123'
+    environment:
+      - CLICKHOUSE_DB=DevDB
+      - CLICKHOUSE_USER=SA
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+      - CLICKHOUSE_PASSWORD=str0ngPwd
+    networks:
+      - clickhouse

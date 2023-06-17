@@ -7,8 +7,6 @@ internal class Program
     {
         Appconfig.Init();
         OpenMenu();
-        //csvDumper();
-
     }
     private static void csvDumper()
     {
@@ -21,9 +19,8 @@ internal class Program
             else Console.WriteLine("Invalid floder:"+floder);
             floder = Console.ReadLine()!;
         }
-        var timer = Stopwatch.StartNew();
         Console.Clear();
-        Console.WriteLine("Starting dump process:");
+        Console.WriteLine("Starting dump process...");
         Parallel.ForEach(CsvSource, (directory) =>
         {
             var minDate = new DateTime(2018, 01, 01);
@@ -48,8 +45,9 @@ internal class Program
             }
         });
 
-        timer.Stop();
-        Console.WriteLine($"Dump completed in {timer.ElapsedMilliseconds}");
+        Console.WriteLine($"Dump completed");
+        Console.ReadKey();
+        OpenMenu();
     }
 
     private static void fileWatcher()
@@ -72,6 +70,7 @@ internal class Program
         watcher.EnableRaisingEvents = true;
         Console.WriteLine("Press enter to exit.");
         Console.ReadKey();
+        OpenMenu();
     }
 
     private static void onChange(object sender, FileSystemEventArgs e)
@@ -140,6 +139,7 @@ internal class Program
         {
             case 0:
                 Appconfig.CreateConfig();
+                OpenMenu();
                 break;
             case 1:
                 csvDumper();

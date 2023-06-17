@@ -30,6 +30,22 @@ namespace zinc_api.Services
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<KEC1>().IsUnlogged(true);
+            modelBuilder.Entity<KEC2>().IsUnlogged(true);
+            modelBuilder.Entity<KEC_Kadmievoe>().IsUnlogged(true);
+            modelBuilder.Entity<GMC_Velc1>().IsUnlogged(true);
+            modelBuilder.Entity<GMC_Velc2>().IsUnlogged(true);
+            modelBuilder.Entity<SKC1>().IsUnlogged(true);
+            modelBuilder.Entity<SKC2>().IsUnlogged(true);
+            modelBuilder.Entity<GMC_Larox>().IsUnlogged(true);
+            modelBuilder.Entity<OBG1>().IsUnlogged(true);
+            modelBuilder.Entity<OBG2>().IsUnlogged(true);
+            modelBuilder.Entity<Velc_KVP5>().IsUnlogged(true);
+            modelBuilder.Entity<Velc_KVP6>().IsUnlogged(true);
+            modelBuilder.Entity<Vysh>().IsUnlogged(true);
+            modelBuilder.Entity<HVP>().IsUnlogged(true);
+
+
             modelBuilder.Entity<Department>().HasData(new {id=1, name="OBG" });
             modelBuilder.Entity<Department>().HasData(new { id = 2, name = "VELC" });
             modelBuilder.Entity<Department>().HasData(new { id = 3, name = "GMC" });

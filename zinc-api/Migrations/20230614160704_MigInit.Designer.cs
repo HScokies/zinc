@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using zinc_api.Services;
@@ -11,9 +12,11 @@ using zinc_api.Services;
 namespace zinc_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230614160704_MigInit")]
+    partial class MigInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,8 +99,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("gmc_larox");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Velc1", b =>
@@ -120,8 +121,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("gmc_velc1");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.GMC_Velc2", b =>
@@ -144,8 +143,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("gmc_velc2");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.HVP", b =>
@@ -168,8 +165,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("hvp");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.KEC1", b =>
@@ -192,8 +187,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("kec1");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.KEC2", b =>
@@ -216,8 +209,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("kec2");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.KEC_Kadmievoe", b =>
@@ -240,8 +231,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("kec_kadmievoe");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.OBG1", b =>
@@ -264,8 +253,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("obg1");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.OBG2", b =>
@@ -288,8 +275,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("obg2");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.SKC1", b =>
@@ -312,8 +297,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("skc1");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.SKC2", b =>
@@ -336,8 +319,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("skc2");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Station", b =>
@@ -530,8 +511,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("velc_kvp5");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Velc_KVP6", b =>
@@ -554,8 +533,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("velc_kvp6");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Vysh", b =>
@@ -578,8 +555,6 @@ namespace zinc_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("vysh");
-
-                    NpgsqlEntityTypeBuilderExtensions.IsUnlogged(b, true);
                 });
 
             modelBuilder.Entity("zinc_api.Models.Entities.Station", b =>

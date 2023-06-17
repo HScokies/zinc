@@ -11,14 +11,13 @@ namespace Watcher
 {
     static class Appconfig
     {
-        private static string BASE_URL = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WatcherData");
+        public static string BASE_URL = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WatcherData");
         private static string dbconfig = "dbconfig.json";
 
         public static string errorsLog = Path.Combine(BASE_URL, "Errors.log");
 
+        public static ConfigModel dbcfg = new();
 
-        public static ConfigModel cfg = new();
-        
         public static void Init()
         {
             if (!Directory.Exists(BASE_URL))
@@ -36,9 +35,9 @@ namespace Watcher
                 {
                     using (FileStream fs = new FileStream(Path.Combine(BASE_URL, dbconfig), FileMode.OpenOrCreate))
                     {
-                        cfg = JsonSerializer.Deserialize<ConfigModel>(fs)!;
+                        dbcfg = JsonSerializer.Deserialize<ConfigModel>(fs)!;
                     }
-                    PgDatabase.init($"Host={cfg.SERVER};Port={cfg.PORT};Database={cfg.DATABASE};Username={cfg.USER};Password={cfg.PASSWORD};timeout=1024");
+                    PgDatabase.Init($"Host={dbcfg.SERVER};Port={dbcfg.PORT};Database={dbcfg.DATABASE};Username={dbcfg.USER};Password={dbcfg.PASSWORD};timeout=1024");
                 }
                 catch (Exception ex)
                 {
@@ -57,7 +56,7 @@ namespace Watcher
             DbConfig();
             using (FileStream fs = new FileStream(Path.Combine(BASE_URL, dbconfig), FileMode.OpenOrCreate))
             {
-                JsonSerializer.Serialize<ConfigModel>(fs, cfg);
+                JsonSerializer.Serialize<ConfigModel>(fs, dbcfg);
                 Console.WriteLine($"Created: {Path.Combine(BASE_URL, dbconfig)}");
             }
         }
@@ -70,27 +69,27 @@ namespace Watcher
             
             Console.Write("\n\tServer [localhost]:");
             input = Console.ReadLine()!;
-            cfg.SERVER = !string.IsNullOrWhiteSpace(input)?  input : "localhost";
+            dbcfg.SERVER = !string.IsNullOrWhiteSpace(input)?  input : "localhost";
 
             Console.Write("\n\tDatabase [postgres]:");
             input = Console.ReadLine()!;
-            cfg.DATABASE = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
+            dbcfg.DATABASE = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
 
             Console.Write("\n\tPort [5432]:");
             input = Console.ReadLine()!;
-            cfg.PORT = !string.IsNullOrWhiteSpace(input) ? input : "5432";
+            dbcfg.PORT = !string.IsNullOrWhiteSpace(input) ? input : "5432";
 
             Console.Write("\n\tUsername [postgres]:");
             input = Console.ReadLine()!;
-            cfg.USER = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
+            dbcfg.USER = !string.IsNullOrWhiteSpace(input) ? input : "postgres";
 
-            Console.Write($"\n\tPassword for user {cfg.USER}:");
+            Console.Write($"\n\tPassword for user {dbcfg.USER}:");
             input = Console.ReadLine()!;
-            cfg.PASSWORD = input;
+            dbcfg.PASSWORD = input;
 
             try
             {
-                PgDatabase.init($"Host={cfg.SERVER};Port={cfg.PORT};Database={cfg.DATABASE};Username={cfg.USER};Password={cfg.PASSWORD};timeout=1024");
+                PgDatabase.Init($"Host={dbcfg.SERVER};Port={dbcfg.PORT};Database={dbcfg.DATABASE};Username={dbcfg.USER};Password={dbcfg.PASSWORD};timeout=1024");
             }
             catch (Exception e)
             {
@@ -101,21 +100,21 @@ namespace Watcher
         }
     
     }
-        class ConfigModel
+    class ConfigModel
+    {
+        public string SERVER { get; set; } = null!;
+        public string PORT { get; set; } = null!;
+        public string DATABASE { get; set; } = null!;
+        public string USER { get; set; } = null!;
+        public string PASSWORD { get; set; } = null!;
+        public ConfigModel(string server = "localhost", string port = "5432", string database = "postgres", string user = "postgres", string password = null!)
         {
-            public string SERVER {get; set;}
-            public string PORT { get; set; }
-            public string DATABASE { get; set; }
-            public string USER { get; set; }
-            public string PASSWORD { get; set; }
-        public ConfigModel(string server = "localhost", string port = "5432", string database = "postgres", string user = "postgres", string password =  null!)
-            {
-                SERVER = server;
-                PORT = port;
-                DATABASE = database;
-                USER = user;
-                PASSWORD = password;
-            }
+            SERVER = server;
+            PORT = port;
+            DATABASE = database;
+            USER = user;
+            PASSWORD = password;
+        }
     }
     #endregion
 }
