@@ -11,25 +11,6 @@ namespace Watcher
 {
     static class Appconfig
     {
-        #region Station aliases
-                public static Dictionary<string, string> Stations = new Dictionary<string, string>()
-                {
-                    { "CHPEW2", "kec1"},
-                    { "CHPEW3", "kec2" },
-                    { "KADMIEVOE", "kec_kadmievoe" },
-                    { "IUS_VELC1", "gmc_velc1" },
-                    { "IUS_VELC2", "gmc_velc2" },
-                    { "IUS_SKC42", "skc1" },
-                    { "IUS_SKC43", "skc2" },
-                    { "LAROX", "gmc_larox" },
-                    { "IUS_OBG511", "obg1" },
-                    { "IUS_OBG52", "obg2" },
-                    { "VELC5PC21", "velc_kvp5" },
-                    { "KVP61", "velc_kvp6" },
-                    { "IUS_V5", "vysh" },
-                    { "HVP-Station", "hvp" }
-                };
-                #endregion
         public static string BASE_URL = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WatcherData");
         private static string dbconfig = "dbconfig.json";
         public static string errorsLog = Path.Combine(BASE_URL, "Errors.log");

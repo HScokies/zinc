@@ -7,7 +7,7 @@ public static class DataParser
 
     public static void parseDat(string datPath, string station)
     {
-        string query = $"INSERT INTO {Appconfig.Stations[station]}(num, timestamp, val) VALUES ";
+        string query = $"INSERT INTO `{ClickhouseDB.Stations[station]}`(`timestamp`, `indices`, `values`) VALUES ";
 
         using (var fs = File.OpenRead(datPath))
         using (BufferedStream bs = new BufferedStream(fs))
@@ -28,7 +28,7 @@ public static class DataParser
         {
             using (var sr = new StreamReader(bs))
             {
-                string query = $"INSERT INTO {Appconfig.Stations[station]}(num, timestamp, val) VALUES ";
+                string query = $"INSERT INTO `{ClickhouseDB.Stations[station]}`(`timestamp`, `indices`, `values`) VALUES ";
                 string csvData;
                 while ((csvData = sr.ReadLine()!) != null)
                 {
@@ -38,7 +38,7 @@ public static class DataParser
                         string[] rowData = row.Split(';');
                         try
                         {
-                            query+=ReadSingleRow(rowData[0], rowData[1], rowData);
+                            query+=ReadSingleRow(rowData[0], rowData[1], rowData);                           
                         }
                         catch
                         {
@@ -47,20 +47,29 @@ public static class DataParser
 
                     }
                 }
-                Console.WriteLine(query.Substring(0, query.Length - 1));
-                //PgDatabase.Execute(query.Substring(0, query.Length - 1));
+                ClickhouseDB.Execute(query.Substring(0, query.Length - 1));
             }
         }
     }
 
     private static string ReadSingleRow(string CreationDate, string CreationTime, string[] data)
     {
-        string query = null!;
+        string query = $"('{Convert.ToDateTime(CreationDate +" "+ CreationTime).ToString("yyyy-MM-dd hh:mm:ss")}', ";
+        string indices = null!;
+        string values = null!;
         for (int i = 2; i < data.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(data[i])) { continue; }
-            query += $"({i-1}, '{CreationDate} {CreationTime}', {data[i].Replace(",",".")}),";
+            indices += $"{i},";
+            values += $"{data[i].Replace(",", ".")},";
         }
+        if (indices != null)
+        {
+            values = values.Substring(0, values.Length - 1);
+            indices = indices.Substring(0, indices.Length - 1);
+        }
+
+        query += "["+indices + "],[" + values + "]),";
         return query;
     }
 }

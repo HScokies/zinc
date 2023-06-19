@@ -6,8 +6,7 @@ internal class Program
     private static void Main(string[] args)
     {
         Appconfig.Init();
-        ClickhouseDB.InitMigration();
-        //OpenMenu();
+        OpenMenu();
     }
     private static void csvDumper()
     {
@@ -22,6 +21,7 @@ internal class Program
         }
         Console.Clear();
         Console.WriteLine("Starting dump process...");
+        ClickhouseDB.connection.Open();
         Parallel.ForEach(CsvSource, (directory) =>
         {
             var minDate = new DateTime(2018, 01, 01);
@@ -41,14 +41,14 @@ internal class Program
                     {
                         Console.WriteLine($"[\u001b[31mERR\u001b[37m] {file}");
                         Logger(DateTime.Now, file, ex.Message);
+
                     }
                 }
             }
         });
-
+        ClickhouseDB.connection.Close();
         Console.WriteLine($"Dump completed");
         Console.ReadKey();
-        OpenMenu();
     }
 
     private static void fileWatcher()
@@ -62,7 +62,7 @@ internal class Program
         }
         Console.Clear();
         Console.WriteLine("Initializing the watcher...");
-        
+        ClickhouseDB.connection.Open();
         using FileSystemWatcher watcher = new FileSystemWatcher(directory);
         watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite;
         watcher.Changed += onChange;
@@ -71,7 +71,7 @@ internal class Program
         watcher.EnableRaisingEvents = true;
         Console.WriteLine("Press enter to exit.");
         Console.ReadKey();
-        OpenMenu();
+        ClickhouseDB.connection.Close();
     }
 
     private static void onChange(object sender, FileSystemEventArgs e)
@@ -105,7 +105,8 @@ internal class Program
         Console.Clear();
         Console.CursorVisible = false;
         (int left, int top) = Console.GetCursorPosition();
-        int currentOption = 2;
+        int currentOption = 3;
+        int optionsCount = 4;
 
         string active = "\u001b[32m";
         string inactive = "\u001b[0m";
@@ -116,6 +117,7 @@ internal class Program
         while (!isSelected)
         {
             Console.SetCursorPosition(left, top);
+            Console.WriteLine($"{(currentOption == 3 ? active : "")}Initiate migration{inactive}");
             Console.WriteLine($"{(currentOption == 2 ? active : "")}File Watcher{inactive}");
             Console.WriteLine($"{(currentOption == 1 ? active : "")}CSV Dumper{inactive}");
             Console.WriteLine($"{(currentOption == 0 ? active : "")}Database config{inactive}");
@@ -123,11 +125,11 @@ internal class Program
             switch ( key.Key )
             {
                 case ConsoleKey.UpArrow:
-                    currentOption = (currentOption + 1) % 3;
+                    currentOption = (currentOption + 1) % optionsCount;
                     break;
 
                 case ConsoleKey.DownArrow:
-                    currentOption = (currentOption - 1) < 0? 2 : (currentOption - 1) % 3;
+                    currentOption = (currentOption - 1) < 0? 3 : (currentOption - 1) % optionsCount;
                     break;
 
                 case ConsoleKey.Enter:
@@ -144,9 +146,15 @@ internal class Program
                 break;
             case 1:
                 csvDumper();
+                OpenMenu();
                 break;
             case 2:
                 fileWatcher();
+                OpenMenu();
+                break;
+            case 3:
+                ClickhouseDB.InitMigration();
+                OpenMenu();
                 break;
         }
     }

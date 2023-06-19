@@ -3,7 +3,26 @@ using Octonica.ClickHouseClient;
 using Watcher;
 
 static public class ClickhouseDB{
-    static ClickHouseConnection connection = new();
+    #region Station aliases
+    public static Dictionary<string, string> Stations = new Dictionary<string, string>()
+                {
+                    { "CHPEW2", "kec1"},
+                    { "CHPEW3", "kec2" },
+                    { "KADMIEVOE", "kec_kadmievoe" },
+                    { "IUS_VELC1", "gmc_velc1" },
+                    { "IUS_VELC2", "gmc_velc2" },
+                    { "IUS_SKC42", "skc1" },
+                    { "IUS_SKC43", "skc2" },
+                    { "LAROX", "gmc_larox" },
+                    { "IUS_OBG511", "obg1" },
+                    { "IUS_OBG52", "obg2" },
+                    { "VELC5PC21", "velc_kvp5" },
+                    { "KVP61", "velc_kvp6" },
+                    { "IUS_V5", "vysh" },
+                    { "HVP-Station", "hvp" }
+                };
+    #endregion
+    static public ClickHouseConnection connection = new();
 
     static public void Init(ConfigModel config)
     {
@@ -27,19 +46,27 @@ static public class ClickhouseDB{
 
     static public void InitMigration()
     {
+        Console.WriteLine("Build started...");
         connection.Open();
-        string table, data;
-        #region Departments migration
-        table = "CREATE TABLE IF NOT EXISTS `departments`(`id` Int8, `name` String) ENGINE=MergeTree PRIMARY KEY(id);";
-        data = "INSERT INTO `departments`(`id`, `name`) VALUES (1, 'OBG'),(2,'VELC'),(3,'GMC'),(4, 'SKC'),(5,'HVP'),(6,'VYSH'),(7,'KEC');";
-        Execute(table);
-        Execute(data);
-        #endregion
-        #region Stations migration
-        table = "CREATE TABLE IF NOT EXISTS `stations`(`id` Int8, `name` String) ENGINE=MergeTree PRIMARY KEY(id);";
-        data = "INSERT INTO `departments`(`id`, `name`) VALUES (1, 'OBG'),(2,'VELC'),(3,'GMC'),(4, 'SKC'),(5,'HVP'),(6,'VYSH'),(7,'KEC');";
-        #endregion
+        string Engine = "MergeTree";
+        string OrderBy = "timestamp";
+        foreach(var stationAlias in Stations)
+        {
+            try
+            {
+                string cmd = $"CREATE TABLE IF NOT EXISTS {stationAlias.Value}(`timestamp` DateTime,`indices` Array(Int16), `values` Array(DOUBLE)) ENGINE={Engine} ORDER BY `{OrderBy}`;";
+                Execute(cmd);
+                Console.WriteLine(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Build failed.\n"+ex.Message);
+            }
+
+        }
         connection.Close();
+        Console.WriteLine("Build succeeded.\nPress any key ...");
+        Console.ReadKey();
     }
 }
 
