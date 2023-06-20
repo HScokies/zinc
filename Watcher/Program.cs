@@ -6,7 +6,8 @@ internal class Program
     private static void Main(string[] args)
     {
         Appconfig.Init();
-        OpenMenu();
+        //OpenMenu();
+        csvDumper();
     }
     private static void csvDumper()
     {
@@ -21,6 +22,7 @@ internal class Program
         }
         Console.Clear();
         Console.WriteLine("Starting dump process...");
+        var timer = Stopwatch.StartNew();
         ClickhouseDB.connection.Open();
         Parallel.ForEach(CsvSource, (directory) =>
         {
@@ -47,7 +49,8 @@ internal class Program
             }
         });
         ClickhouseDB.connection.Close();
-        Console.WriteLine($"Dump completed");
+        timer.Stop();
+        Console.WriteLine($"Dump completed in {timer.ElapsedMilliseconds}ms");
         Console.ReadKey();
     }
 
