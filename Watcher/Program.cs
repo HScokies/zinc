@@ -6,8 +6,7 @@ internal class Program
     private static void Main(string[] args)
     {
         Appconfig.Init();
-        //OpenMenu();
-        csvDumper();
+        OpenMenu();
     }
     private static void csvDumper()
     {
