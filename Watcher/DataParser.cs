@@ -4,9 +4,11 @@ using Watcher;
 
 public static class DataParser
 {
+    static NumberFormatInfo nfi = new NumberFormatInfo();
 
     public static void parseDat(string datPath, string station)
     {
+        nfi.NumberDecimalSeparator = ",";
         string query = $"INSERT INTO `{ClickhouseDB.Stations[station]}`(`timestamp`, `indices`, `values`) VALUES ";
 
         using (var fs = File.OpenRead(datPath))
@@ -23,6 +25,7 @@ public static class DataParser
 
     public static void parseCsv(string csvPath, string station)
     {
+        nfi.NumberDecimalSeparator = ",";
         using (var fs = File.OpenRead(csvPath))
         using (BufferedStream bs = new BufferedStream(fs))
         {
@@ -61,7 +64,7 @@ public static class DataParser
         {
             if (string.IsNullOrWhiteSpace(data[i])) { continue; }
             indices += $"{i},";
-            values += $"{data[i].Replace(",", ".")},";
+            values += $"{double.Parse(data[i],nfi)},";
         }
         if (indices != null)
         {
